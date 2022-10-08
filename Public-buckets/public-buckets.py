@@ -27,7 +27,7 @@ def print_results(buckets):
             print(f'- {url}')
 
 
-def get_public_buckets(AWS_ROLE):
+def get_public_buckets():
     """
     Gets s3 buckets that are public access.
     :param AWS_ROLE: this parameter, passe how account will be usade.
@@ -75,6 +75,6 @@ def get_public_buckets(AWS_ROLE):
 
 
 if __name__=="__main__":
-    buckets = get_public_buckets(AWS_ROLE)
+    buckets = get_public_buckets()
     print_results(buckets)
     
