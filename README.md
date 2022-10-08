@@ -6,3 +6,4 @@ Toolset to check security configurations in AWS environments.
 ## Tools:
   - [Root-Monitoing](https://github.com/viniciusrdsilva/AWS-Inspector/tree/main/Root-Monitoring): Root account usage monitoring
   - [Public-Buckets](https://github.com/viniciusrdsilva/AWS-Inspector/tree/main/Public-buckets): Search for public buckets
+  - [Bucket-Encryption](https://github.com/viniciusrdsilva/AWS-Inspector/tree/main/Bucket-Encryption): Search for buckets without encryption
