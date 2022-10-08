@@ -7,8 +7,9 @@ from src.get_urls import get_urls
 
 
 # Creating variables
-AWS_ROLE = 'staging'
+EXCEPTION_BUCKET_LIST = []
 buckets = {}
+
 
 
 
@@ -34,9 +35,8 @@ def get_public_buckets(AWS_ROLE):
     """
     
     # Connection with S3
-    session = boto3.Session(profile_name=AWS_ROLE)
-    s3_resource = session.resource("s3")
-    s3_client = session.client("s3")
+    s3_resource = boto3.Session().resource("s3")
+    s3_client = boto3.Session().client("s3")
     
     
     # Getting bucket list names
@@ -45,22 +45,23 @@ def get_public_buckets(AWS_ROLE):
     
     # Getting all infotion security about the buckets
     for bucket in buckets_list:
-        bucket_name = bucket.name
-        bucket_acl = bucket.Acl()
-        public_permission_list = get_public_permission_informations(bucket_acl)
-        findings = []
-        for finding in public_permission_list:
-            if finding == []:
-                break
-            elif finding["public"] == False:
-                break
-            else:
-                findings.append(finding)
-        
-        if len(findings) > 0:
-            bucket_location = get_location(s3_client, bucket_name=bucket_name)
-            bucket_urls = get_urls(bucket_name)
-            buckets[bucket_name] = {"location": bucket_location, "findings" : findings, "urls": bucket_urls}
+        if bucket.name not in EXCEPTION_BUCKET_LIST:
+            bucket_name = bucket.name
+            bucket_acl = bucket.Acl()
+            public_permission_list = get_public_permission_informations(bucket_acl)
+            findings = []
+            for finding in public_permission_list:
+                if finding == []:
+                    break
+                elif finding["public"] == False:
+                    break
+                else:
+                    findings.append(finding)
+            
+            if len(findings) > 0:
+                bucket_location = get_location(s3_client, bucket_name=bucket_name)
+                bucket_urls = get_urls(bucket_name)
+                buckets[bucket_name] = {"location": bucket_location, "findings" : findings, "urls": bucket_urls}
         
     return buckets
             

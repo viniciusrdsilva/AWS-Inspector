@@ -6,3 +6,4 @@ Compatible with Linux, MacOS and Windows, python 2.7 and 3. May be used as AWS L
 
 ## Tools:
   - [Root-Monitoing](https://github.com/viniciusrdsilva/AWS-Inspector/tree/main/Root-Monitoring): Root account usage monitoring
+  - [Public-Buckets](https://github.com/viniciusrdsilva/AWS-Inspector/tree/main/Public-buckets): Search for public buckets
